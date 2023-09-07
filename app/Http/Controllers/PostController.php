@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;//Postクラスをインポートしている。
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -12,8 +13,21 @@ class PostController extends Controller
 	return view('posts.index')->with(['posts' => $post->getPaginateByLimit()]);
 	//GetPagenateByLimit()はPost.phpで定義したメソッド。
     }
+
     public function show(Post $post)
     {
 	return view('posts.show')->with(['post'=>$post]);
+    }
+
+    public function create(Post $post)
+    {
+	return view('posts.create');
+    }
+
+    public function store(PostRequest $request, Post $post)
+    {
+	$input = $request['post'];
+	$post->fill($input)->save();
+	return redirect('/posts/' . $post->id);
     }
 }

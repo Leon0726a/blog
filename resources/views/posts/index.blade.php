@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>blogl</title>
+        <title>blog</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -10,19 +10,20 @@
 
     </head>
     <body class="antialiased">
-        <h1>Blog Name</h1>
-        <div class='posts'>
-	  @foreach ($posts as $post)
-          <div class='post'>
-            <h2 class='title'>
-	      <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
-	    </h2>
-            <p class='body'>{{ $post->body }}</p>
-          </div>
-	  @endforeach
+      <h1>Blog Name</h1>
+      <a href='/posts/create'>create</a>
+      <div class='posts'>
+	@foreach ($posts as $post)
+        <div class='post'>
+          <h2 class='title'>
+	    <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
+	  </h2>
+          <p class='body'>{{ $post->body }}</p>
         </div>
-	<div class='paginate'>
-	  {{ $posts->links() }}
-	</div>
+	@endforeach
+      </div>
+      <div class='paginate'>
+	{{ $posts->links() }}
+      </div>
     </body>
 </html>
